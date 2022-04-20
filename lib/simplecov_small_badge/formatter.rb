@@ -15,6 +15,9 @@ module SimpleCovSmallBadge
       percent = result.source_files.covered_percent.round(0)
       @image = RepoSmallBadge::Image.new(map_image_config(state(percent)))
       badge('total', 'total', percent)
+
+      return unless @config.with_groups
+
       group_percent_from_result(result) do |name, title, cov_percent|
         badge(name, title, cov_percent.round(0))
       end
